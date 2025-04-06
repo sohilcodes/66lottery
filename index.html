@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gift Code Maker site by sohil. khan</title>
+    <title>Gift Code Maker site by Sohil Khan</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -147,7 +147,8 @@
 
     <div class="container">
         <h1>66 Lottery Gift Code Maker</h1>
-        <div class="made-by">Made by Vidhayak</div>
+        <div class="made-by">Made by Sohil Codes</div>
+
         <input type="text" id="userId" placeholder="Enter your ID">
         <br>
         <button onclick="createCode()">Create Code</button>
@@ -155,12 +156,24 @@
         <div id="errorMessage" class="error-message">
             User is not valid. Please create a new ID and verify again.
             <br><br>
-            <button class="create-id-btn" onclick="window.open('https://www.66lottery18.com/#/pages/login/register?invitationCode=7747896911', '_blank')">Create ID</button>
+            <button class="create-id-btn"
+                onclick="window.open('https://www.66lottery18.com/#/pages/login/register?invitationCode=7747896911', '_blank')">Create
+                ID</button>
         </div>
 
         <div id="history" class="history">
             <h3>Code History</h3>
         </div>
+
+        <!-- Telegram Login Widget -->
+        <script async src="https://telegram.org/js/telegram-widget.js?7"
+            data-telegram-login="@FreeRcGiftCodeBot" 
+            data-size="medium"
+            data-userpic="false"
+            data-radius="10"
+            data-request-access="write"
+            data-on-auth="onTelegramAuth">
+        </script>
     </div>
 
     <footer>
@@ -199,16 +212,25 @@
     </script>
 
     <script>
-        const botToken = "7945500836:AAG4c4L14_qW7lixUGyrmeUVZjSV3Wi164w";
-        const chatId = "6411315434";
-        let now = new Date();
-        let hours = String(now.getHours()).padStart(2, '0');
-        let minutes = String(now.getMinutes()).padStart(2, '0');
-        let seconds = String(now.getSeconds()).padStart(2, '0');
-        let formattedTime = `${hours}:${minutes}:${seconds}`;
-        const message = `https://sohilcodes.github.io/66lottery/ New User Visited at ${formattedTime}`;
-        const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
-        fetch(url);
+        function onTelegramAuth(user) {
+            const telegramId = user.id;
+            const name = user.first_name + (user.last_name ? ' ' + user.last_name : '');
+            const username = user.username ? '@' + user.username : '';
+
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const formattedTime = `${hours}:${minutes}:${seconds}`;
+
+            const message = `New User from Telegram!\nTime: ${formattedTime}\nTelegram ID: ${telegramId}\nName: ${name}\nUsername: ${username}\nVisited: https://sohilcodes.github.io/66lottery/`;
+
+            const botToken = "7945500836:AAG4c4L14_qW7lixUGyrmeUVZjSV3Wi164w";
+            const chatId = "6411315434";
+
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+            fetch(url);
+        }
     </script>
 
 </body>
